@@ -28,30 +28,18 @@
       <option value="Négociant">Négociant</option>
     </select>
 
-    <!-- Plateforme -->
-    <label for="platform">Plateforme :</label>
-    <select id="platform">
-      <option value="societe.com">Societe.com</option>
-      <option value="pappers.fr">Pappers</option>
-      <option value="pagesjaunes.fr">PagesJaunes</option>
-      <option value="infogreffe.fr">Infogreffe</option>
-      <option value="custom">Autre (personnalisé)</option>
-    </select>
-    <input type="text" id="customPlatform" placeholder="Entrez votre site (ex: alibaba.com)" style="display: none;">
-
     <!-- Précision -->
     <label for="precision">Précision :</label>
     <select id="precision">
-  <option value="souple" selected>Souple</option>
+      <option value="souple" selected>Souple</option>
+      <option value="large">Large</option>
     </select>
 
     <!-- Localisation -->
     <label for="country">Pays :</label>
     <select id="country">
       <option value="France" selected>France</option>
-      <!-- <option value="Belgique">Belgique</option>
-      <option value="Suisse">Suisse</option>
-      <option value="Luxembourg">Luxembourg</option> -->
+      <option value="Belgique">Belgique</option>
     </select>
 
     <!-- Type de localisation -->
@@ -67,9 +55,15 @@
       <div id="regionCheckboxes" class="checkbox-container"></div>
     </div>
 
-
     <label for="commune">Commune / Ville :</label>
     <input type="text" id="commune" placeholder="Ex : Paris, Marseille, Lyon...">
+
+    <!-- Plateforme (MAINTENANT APRÈS la localisation) -->
+    <label for="platform">Plateforme :</label>
+    <select id="platform">
+      <!-- Sera rempli dynamiquement en fonction du pays -->
+    </select>
+    <input type="text" id="customPlatform" placeholder="Entrez votre site (ex: alibaba.com)" style="display: none;">
 
     <!-- Bouton générer -->
     <button id="generateBtn">Générer la recherche</button>

@@ -1,13 +1,40 @@
+import { getCountryData } from '../data/countries/index.js';
 import {
   populateCountries,
   populateLocationTypes,
   cleanDepartmentName,
   renderCheckboxes,
   updateTags,
-  initSearch
+  initSearch,
+  state
 } from '../modules/LocationSelector/index.js';
 
-export function setupDomEvents({ buildQuery, companyKeywords, state }) {
+// Fonction pour peupler les plateformes en fonction du pays
+function populatePlatforms(platformSelect, customPlatformInput, country) {
+  const data = getCountryData(country);
+  platformSelect.innerHTML = '';
+  
+  if (data && data.platforms) {
+    data.platforms.forEach(platform => {
+      const opt = document.createElement('option');
+      opt.value = platform.value;
+      opt.textContent = platform.label;
+      platformSelect.appendChild(opt);
+    });
+  }
+}
+
+// Fonction pour gérer l'affichage du champ personnalisé
+function handlePlatformChange(platformSelect, customPlatformInput) {
+  if (platformSelect.value === 'custom') {
+    customPlatformInput.style.display = 'block';
+  } else {
+    customPlatformInput.style.display = 'none';
+    customPlatformInput.value = '';
+  }
+}
+
+export function setupDomEvents({ buildQuery, companyKeywords }) {
   const countrySelect = document.getElementById('country');
   const locationTypeSelect = document.getElementById('locationType');
   const searchInput = document.getElementById('regionSearch');
@@ -28,6 +55,17 @@ export function setupDomEvents({ buildQuery, companyKeywords, state }) {
   tagsContainer.className = 'tags-container';
   searchInput.parentNode.insertBefore(tagsContainer, searchInput.nextSibling);
 
+  // ✅ FIX: INITIALIZE PLATFORMS IMMEDIATELY ON PAGE LOAD
+  setTimeout(() => {
+    populatePlatforms(platformSelect, customPlatformInput, state.currentCountry);
+    handlePlatformChange(platformSelect, customPlatformInput);
+  }, 0);
+
+  // Gérer le changement de plateforme
+  platformSelect.addEventListener('change', function() {
+    handlePlatformChange(platformSelect, customPlatformInput);
+  });
+
   // Init search logic
   initSearch(searchInput, checkboxContainer, state.selectedLocations, () => updateTags(tagsContainer, state.selectedLocations, renderCheckboxes, searchInput));
 
@@ -35,7 +73,13 @@ export function setupDomEvents({ buildQuery, companyKeywords, state }) {
   countrySelect.addEventListener('change', function () {
     state.currentCountry = this.value;
     state.selectedLocations.clear();
-    populateLocationTypes(locationTypeSelect, () => updateTags(tagsContainer, state.selectedLocations, renderCheckboxes, searchInput), (s) => renderCheckboxes(checkboxContainer, s, state.selectedLocations, () => updateTags(tagsContainer, state.selectedLocations, renderCheckboxes, searchInput), searchInput));
+    
+    // Mettre à jour les plateformes pour le nouveau pays
+    populatePlatforms(platformSelect, customPlatformInput, state.currentCountry);
+    handlePlatformChange(platformSelect, customPlatformInput);
+    
+    populateLocationTypes(locationTypeSelect, () => updateTags(tagsContainer, state.selectedLocations, renderCheckboxes, searchInput), 
+        (s) => renderCheckboxes(checkboxContainer, s, state.selectedLocations, () => updateTags(tagsContainer, state.selectedLocations, renderCheckboxes, searchInput), searchInput));
   });
 
   // Location type change
@@ -46,23 +90,13 @@ export function setupDomEvents({ buildQuery, companyKeywords, state }) {
     renderCheckboxes(checkboxContainer, '', state.selectedLocations, () => updateTags(tagsContainer, state.selectedLocations, renderCheckboxes, searchInput), searchInput);
   });
 
-  // Platform select change
-  platformSelect.addEventListener('change', function () {
-    if (this.value === 'custom') {
-      customPlatformInput.style.display = 'block';
-    } else {
-      customPlatformInput.style.display = 'none';
-      customPlatformInput.value = '';
-    }
-  });
-
   // Generate & open search
   generateBtn.addEventListener('click', function () {
     const product = productInput.value.trim();
     const companyType = companyTypeSelect.value;
     const platform = platformSelect.value;
     const customPlatform = customPlatformInput.value.trim();
-  const precision = 'souple';
+    const precision = precisionSelect.value;
     const country = countrySelect.value;
     const commune = communeInput.value.trim();
 
@@ -73,12 +107,12 @@ export function setupDomEvents({ buildQuery, companyKeywords, state }) {
         companyType,
         platform,
         customPlatform,
-  precision,
+        precision,
         country,
         commune,
         selectedLocations: state.selectedLocations,
         currentLocationType: state.currentLocationType,
-        companyKeywords: companyKeywords[country] || {},
+        companyKeywords: companyKeywords[country.toLowerCase()] || {},
         cleanDepartmentName
       });
     } catch (e) {
@@ -98,6 +132,7 @@ export function setupDomEvents({ buildQuery, companyKeywords, state }) {
 
   // init countries and location types
   populateCountries(countrySelect, locationTypeSelect,
-    () => populateLocationTypes(locationTypeSelect, () => updateTags(tagsContainer, state.selectedLocations, renderCheckboxes, searchInput), (s) => renderCheckboxes(checkboxContainer, s, state.selectedLocations, () => updateTags(tagsContainer, state.selectedLocations, renderCheckboxes, searchInput), searchInput))
+    () => populateLocationTypes(locationTypeSelect, () => updateTags(tagsContainer, state.selectedLocations, renderCheckboxes, searchInput), 
+        (s) => renderCheckboxes(checkboxContainer, s, state.selectedLocations, () => updateTags(tagsContainer, state.selectedLocations, renderCheckboxes, searchInput), searchInput))
   );
 }

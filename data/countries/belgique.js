@@ -20,6 +20,13 @@ const Belgique = {
     locationTypes: [
         { value: 'region', label: 'Région' },
         { value: 'province', label: 'Province' }
+    ],
+    platforms: [
+        { value: 'kbopub.economie.fgov.be', label: 'KBO (Banque-Carrefour des Entreprises)' },
+        { value: 'Pappers.be', label: 'Pappers' },
+        { value: 'companyweb.be', label: 'Companyweb' },
+        { value: 'infobel.be', label: 'Infobel' },        
+        { value: 'custom', label: 'Autre (personnalisé)' }
     ]
 };
 

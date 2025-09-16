@@ -40,6 +40,13 @@ const France = {
     locationTypes: [
         { value: 'region', label: 'Région' },
         { value: 'department', label: 'Département' }
+    ],
+    platforms: [
+        { value: 'societe.com', label: 'Societe.com' },
+        { value: 'pappers.fr', label: 'Pappers' },
+        { value: 'pagesjaunes.fr', label: 'PagesJaunes' },
+        { value: 'infogreffe.fr', label: 'Infogreffe' },
+        { value: 'custom', label: 'Autre (personnalisé)' }
     ]
 };
 
