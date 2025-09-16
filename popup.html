@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>SupplyHunter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h2>SupplyHunter</h2>
+  <p class="slogan">Find suppliers faster, smarter.</p>
+
+  <div id="supplyhunter-popup">
+    <!-- Produit -->
+    <label for="product">Produit / Catégorie :</label>
+    <input type="text" id="product" placeholder="Ex : Tournevis, accessoires, plante..">
+
+    <!-- Type d'entreprise -->
+    <label for="companyType">Type d'entreprise :</label>
+    <select id="companyType">
+      <option value="Fabricant">Fabricant</option>
+      <option value="Producteur">Producteur</option>
+      <option value="Grossiste">Grossiste</option>
+      <option value="Distributeur">Distributeur</option>
+      <option value="Importateur">Importateur</option>
+      <option value="Détaillant">Détaillant</option>
+      <option value="Négociant">Négociant</option>
+    </select>
+
+    <!-- Plateforme -->
+    <label for="platform">Plateforme :</label>
+    <select id="platform">
+      <option value="societe.com">Societe.com</option>
+      <option value="pappers.fr">Pappers</option>
+      <option value="pagesjaunes.fr">PagesJaunes</option>
+      <option value="infogreffe.fr">Infogreffe</option>
+      <option value="custom">Autre (personnalisé)</option>
+    </select>
+    <input type="text" id="customPlatform" placeholder="Entrez votre site (ex: alibaba.com)" style="display: none;">
+
+    <!-- Précision -->
+    <label for="precision">Précision :</label>
+    <select id="precision">
+  <option value="souple" selected>Souple</option>
+    </select>
+
+    <!-- Localisation -->
+    <label for="country">Pays :</label>
+    <select id="country">
+      <option value="France" selected>France</option>
+      <!-- <option value="Belgique">Belgique</option>
+      <option value="Suisse">Suisse</option>
+      <option value="Luxembourg">Luxembourg</option> -->
+    </select>
+
+    <!-- Type de localisation -->
+    <label for="locationType">Type de localisation :</label>
+    <select id="locationType">
+      <option value="region" selected>Région</option>
+      <option value="department">Département</option>
+    </select>
+
+    <label>Région (optionnel) :</label>
+    <div class="region-selector">
+      <input type="text" class="search-input" placeholder="Choisissez la région..." id="regionSearch">
+      <div id="regionCheckboxes" class="checkbox-container"></div>
+    </div>
+
+
+    <label for="commune">Commune / Ville :</label>
+    <input type="text" id="commune" placeholder="Ex : Paris, Marseille, Lyon...">
+
+    <!-- Bouton générer -->
+    <button id="generateBtn">Générer la recherche</button>
+
+    <div id="searchUrlContainer" style="display: none; margin-top: 15px;">
+      <label>URL de recherche générée :</label>
+      <textarea id="searchUrl" readonly rows="3" style="width: 100%; padding: 8px; font-size: 12px;"></textarea>
+      <button id="openSearchBtn" style="margin-top: 8px; width: 100%; padding: 8px;">Ouvrir la recherche</button>
+    </div>
+  </div>
+
+  <script src="popup.js" type="module"></script>
+</body>
+
+</html>
