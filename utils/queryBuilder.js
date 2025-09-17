@@ -17,7 +17,7 @@ export function buildQuery({
 
   let queryParts = [`site:${finalPlatform}`];
   
-  // ✅ DICTIONNAIRE DE SECOURS
+  // DICTIONNAIRE DE SECOURS
   const backupKeywords = {
     'Fabricant': 'fabricant',
     'Producteur': 'producteur',
@@ -30,7 +30,7 @@ export function buildQuery({
   
   const userCompanyKeyword = companyKeywords[companyType] || backupKeywords[companyType] || '';
   
-  // ✅ MODE LARGE
+  // MODE LARGE
   if (precision === 'large') {
     const allKeywords = [userCompanyKeyword];
     
@@ -44,7 +44,7 @@ export function buildQuery({
     queryParts.push(`(${allKeywords.join(' OR ')})`);
     
   } else {
-    // ✅ MODE SOUPLE
+    // MODE SOUPLE
     if (userCompanyKeyword) {
       queryParts.push(userCompanyKeyword);
     }
@@ -53,7 +53,7 @@ export function buildQuery({
   // PRODUIT
   queryParts.push(product);
 
-  // ✅ LOCALISATION - Gérer les 3 cas
+  // LOCALISATION - Gérer les 3 cas
   if (currentLocationType === 'commune') {
     // Utiliser la commune tapée
     if (commune) queryParts.push(commune);

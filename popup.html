@@ -45,23 +45,40 @@
     <!-- Type de localisation -->
     <label for="locationType">Type de localisation :</label>
     <select id="locationType">
-      <option value="region" selected>Région</option>
+      <option value="" selected disabled>Choisir l'emplacement...</option>
+      <option value="region">Région</option>
       <option value="department">Département</option>
+      <option value="commune">Commune</option>
     </select>
 
-    <label>Région (optionnel) :</label>
-    <div class="region-selector">
-      <input type="text" class="search-input" placeholder="Choisissez la région..." id="regionSearch">
-      <div id="regionCheckboxes" class="checkbox-container"></div>
+    <!-- Container pour Région (caché par défaut) -->
+    <div id="regionContainer" style="display: none;">
+      <label>Région :</label>
+      <div class="region-selector">
+        <input type="text" class="search-input" placeholder="Rechercher une région..." id="regionSearch">
+        <div id="regionCheckboxes" class="checkbox-container"></div>
+      </div>
     </div>
 
-    <label for="commune">Commune / Ville :</label>
-    <input type="text" id="commune" placeholder="Ex : Paris, Marseille, Lyon...">
+    <!-- Container pour Département (caché par défaut) -->
+    <div id="departmentContainer" style="display: none;">
+      <label>Département :</label>
+      <div class="region-selector">
+        <input type="text" class="search-input" placeholder="Rechercher un département..." id="departmentSearch">
+        <div id="departmentCheckboxes" class="checkbox-container"></div>
+      </div>
+    </div>
 
-    <!-- Plateforme (MAINTENANT APRÈS la localisation) -->
+    <!-- Container pour Commune (caché par défaut) -->
+    <div id="communeContainer" style="display: none;">
+      <label for="communeInput">Nom de la commune :</label>
+      <input type="text" id="communeInput" placeholder="Ex : Paris, Lyon, Marseille...">
+    </div>
+
+    <!-- Plateforme -->
     <label for="platform">Plateforme :</label>
     <select id="platform">
-      <!-- Sera rempli dynamiquement en fonction du pays -->
+      <!-- Rempli dynamiquement -->
     </select>
     <input type="text" id="customPlatform" placeholder="Entrez votre site (ex: alibaba.com)" style="display: none;">
 

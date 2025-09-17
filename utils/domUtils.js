@@ -34,11 +34,24 @@ function handlePlatformChange(platformSelect, customPlatformInput) {
   }
 }
 
+// Fonctions pour gérer l'affichage des sections de localisation
+function hideAllLocationSections() {
+  document.getElementById('regionContainer').style.display = 'none';
+  document.getElementById('departmentContainer').style.display = 'none';
+  document.getElementById('communeContainer').style.display = 'none';
+}
+
 export function setupDomEvents({ buildQuery, companyKeywords }) {
   const countrySelect = document.getElementById('country');
   const locationTypeSelect = document.getElementById('locationType');
-  const searchInput = document.getElementById('regionSearch');
-  const checkboxContainer = document.getElementById('regionCheckboxes');
+  const regionContainer = document.getElementById('regionContainer');
+  const departmentContainer = document.getElementById('departmentContainer');
+  const communeContainer = document.getElementById('communeContainer');
+  const communeInput = document.getElementById('communeInput');
+  const regionSearch = document.getElementById('regionSearch');
+  const departmentSearch = document.getElementById('departmentSearch');
+  const regionCheckboxes = document.getElementById('regionCheckboxes');
+  const departmentCheckboxes = document.getElementById('departmentCheckboxes');
   const generateBtn = document.getElementById('generateBtn');
   const openSearchBtn = document.getElementById('openSearchBtn');
   const searchUrlContainer = document.getElementById('searchUrlContainer');
@@ -48,46 +61,73 @@ export function setupDomEvents({ buildQuery, companyKeywords }) {
   const productInput = document.getElementById('product');
   const companyTypeSelect = document.getElementById('companyType');
   const precisionSelect = document.getElementById('precision');
-  const communeInput = document.getElementById('commune');
 
-  // tags container
-  const tagsContainer = document.createElement('div');
-  tagsContainer.className = 'tags-container';
-  searchInput.parentNode.insertBefore(tagsContainer, searchInput.nextSibling);
+  // tags container pour région
+  const regionTagsContainer = document.createElement('div');
+  regionTagsContainer.className = 'tags-container';
+  regionSearch.parentNode.insertBefore(regionTagsContainer, regionSearch.nextSibling);
 
-  // ✅ FIX: INITIALIZE PLATFORMS IMMEDIATELY ON PAGE LOAD
+  // tags container pour département/province
+  const departmentTagsContainer = document.createElement('div');
+  departmentTagsContainer.className = 'tags-container';
+  departmentSearch.parentNode.insertBefore(departmentTagsContainer, departmentSearch.nextSibling);
+
+  // ✅ INITIALISER LES PLATEFORMES AU CHARGEMENT
   setTimeout(() => {
     populatePlatforms(platformSelect, customPlatformInput, state.currentCountry);
     handlePlatformChange(platformSelect, customPlatformInput);
   }, 0);
+
+  // ✅ Gérer le changement de type de localisation
+  locationTypeSelect.addEventListener('change', function() {
+    state.currentLocationType = this.value;
+    hideAllLocationSections();
+    state.selectedLocations.clear();
+    
+    if (this.value === 'region') {
+      regionContainer.style.display = 'block';
+      updateTags(regionTagsContainer, state.selectedLocations, renderCheckboxes, regionSearch);
+    } else if (this.value === 'department' || this.value === 'province') {
+      departmentContainer.style.display = 'block';
+      // ✅ CHANGE LE PLACEHOLDER SELON LE TYPE
+      departmentSearch.placeholder = this.value === 'department' ? 
+        'Rechercher un département...' : 'Rechercher une province...';
+      updateTags(departmentTagsContainer, state.selectedLocations, renderCheckboxes, departmentSearch);
+    } else if (this.value === 'commune') {
+      communeContainer.style.display = 'block';
+    }
+  });
 
   // Gérer le changement de plateforme
   platformSelect.addEventListener('change', function() {
     handlePlatformChange(platformSelect, customPlatformInput);
   });
 
-  // Init search logic
-  initSearch(searchInput, checkboxContainer, state.selectedLocations, () => updateTags(tagsContainer, state.selectedLocations, renderCheckboxes, searchInput));
+  // Init search logic pour région
+  initSearch(regionSearch, regionCheckboxes, state.selectedLocations, () => updateTags(regionTagsContainer, state.selectedLocations, renderCheckboxes, regionSearch));
 
-  // Country change
+  // Init search logic pour département/province
+  initSearch(departmentSearch, departmentCheckboxes, state.selectedLocations, () => updateTags(departmentTagsContainer, state.selectedLocations, renderCheckboxes, departmentSearch));
+
+  // ✅ Country change - ADAPTER L'INTERFACE
   countrySelect.addEventListener('change', function () {
     state.currentCountry = this.value;
     state.selectedLocations.clear();
     
-    // Mettre à jour les plateformes pour le nouveau pays
+    // ✅ RESET ET METTRE À JOUR
+    hideAllLocationSections();
+    locationTypeSelect.value = '';
+    
     populatePlatforms(platformSelect, customPlatformInput, state.currentCountry);
     handlePlatformChange(platformSelect, customPlatformInput);
     
-    populateLocationTypes(locationTypeSelect, () => updateTags(tagsContainer, state.selectedLocations, renderCheckboxes, searchInput), 
-        (s) => renderCheckboxes(checkboxContainer, s, state.selectedLocations, () => updateTags(tagsContainer, state.selectedLocations, renderCheckboxes, searchInput), searchInput));
-  });
-
-  // Location type change
-  locationTypeSelect.addEventListener('change', function () {
-    state.currentLocationType = this.value;
-    state.selectedLocations.clear();
-    updateTags(tagsContainer, state.selectedLocations, renderCheckboxes, searchInput);
-    renderCheckboxes(checkboxContainer, '', state.selectedLocations, () => updateTags(tagsContainer, state.selectedLocations, renderCheckboxes, searchInput), searchInput);
+    // ✅ METTRE À JOUR LES TYPES DE LOCALISATION
+    populateLocationTypes(locationTypeSelect, 
+      () => updateTags(regionTagsContainer, state.selectedLocations, renderCheckboxes, regionSearch),
+      (s) => renderCheckboxes(regionCheckboxes, s, state.selectedLocations, 
+        () => updateTags(regionTagsContainer, state.selectedLocations, renderCheckboxes, regionSearch), 
+        regionSearch)
+    );
   });
 
   // Generate & open search
@@ -130,9 +170,16 @@ export function setupDomEvents({ buildQuery, companyKeywords }) {
     if (url && window.chrome && window.chrome.tabs) window.chrome.tabs.create({ url });
   });
 
-  // init countries and location types
-  populateCountries(countrySelect, locationTypeSelect,
-    () => populateLocationTypes(locationTypeSelect, () => updateTags(tagsContainer, state.selectedLocations, renderCheckboxes, searchInput), 
-        (s) => renderCheckboxes(checkboxContainer, s, state.selectedLocations, () => updateTags(tagsContainer, state.selectedLocations, renderCheckboxes, searchInput), searchInput))
-  );
+  // ✅ INIT COUNTRIES
+  populateCountries(countrySelect, locationTypeSelect);
+  
+  // ✅ INIT LOCATION TYPES APRÈS UN DELAI
+  setTimeout(() => {
+    populateLocationTypes(locationTypeSelect, 
+      () => updateTags(regionTagsContainer, state.selectedLocations, renderCheckboxes, regionSearch),
+      (s) => renderCheckboxes(regionCheckboxes, s, state.selectedLocations, 
+        () => updateTags(regionTagsContainer, state.selectedLocations, renderCheckboxes, regionSearch), 
+        regionSearch)
+    );
+  }, 100);
 }

@@ -1,14 +1,22 @@
 const companyKeywords = {
   france: {
     "Fabricant": "fabricant",
-    "Producteur": "producteur",
+    "Producteur": "producteur", 
     "Grossiste": "grossiste",
     "Distributeur": "distributeur",
     "Importateur": "importateur",
     "Détaillant": "détaillant",
     "Négociant": "négociant"
-    // Ajoute d'autres pays ici
   },
+  belgique: {
+    "Fabricant": "fabricant",
+    "Producteur": "producteur",
+    "Grossiste": "grossiste",
+    "Distributeur": "distributeur", 
+    "Importateur": "importateur",
+    "Détaillant": "détaillant",
+    "Négociant": "négociant"
+  }
 };
 
 export default companyKeywords;

@@ -5,7 +5,13 @@ import companyKeywords from './data/keywords/companyKeywords.js';
 
 document.addEventListener('DOMContentLoaded', function () {
   // Initialisation par défaut si nécessaire
-  if (!state.currentCountry) state.currentCountry = 'france';
+  if (!state.currentCountry) state.currentCountry = 'France'; 
   if (!state.currentLocationType) state.currentLocationType = 'region';
-  setupDomEvents({ buildQuery, companyKeywords: companyKeywords[state.currentCountry], state }); // Passe l'objet complet
+  
+  // ✅ CORRECTION : Utilisez .toLowerCase()
+  setupDomEvents({ 
+    buildQuery, 
+    companyKeywords: companyKeywords[state.currentCountry.toLowerCase()] || {}, // ✅ Protection
+    state 
+  });
 });

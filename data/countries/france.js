@@ -39,7 +39,8 @@ const France = {
     ],
     locationTypes: [
         { value: 'region', label: 'Région' },
-        { value: 'department', label: 'Département' }
+        { value: 'department', label: 'Département' },
+        { value: 'commune', label: 'Commune' }
     ],
     platforms: [
         { value: 'societe.com', label: 'Societe.com' },
