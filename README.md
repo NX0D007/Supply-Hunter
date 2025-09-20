@@ -7,15 +7,20 @@ A smart Chrome extension that helps sourcing professionals generate optimized Go
 ## ✨ Features
 
 - 🛠 Filter by **product / category**
-- 🏭 Choose **company type** (fabricant, grossiste, distributeur, importateur…)
-- 🌐 Select a **platform** (Societe.com, Pappers, PagesJaunes, Infogreffe, or custom)
-- 🎯 Adjust **search precision** (strict, souple, large)
-- 📍 Location filtering:
-  - Country
-  - Region
-  - Department
-  - Commune / City
+- 🏭 Choose **company type** (fabricant, producteur, grossiste, distributeur, importateur, détaillant, négociant)
+- 🌐 Select country-specific **platforms**:
+  - **France**: Societe.com, Pappers, PagesJaunes, Infogreffe
+  - **Belgique**: KBO (Banque-Carrefour des Entreprises), Pappers.be, Companyweb, Infobel
+  - Custom platform support
+- 🎯 Adjust **search precision** (souple, large)
+- 📍 Advanced location filtering:
+  - **Country selection** (France, Belgique)
+  - **Region-based filtering** (Régions in France, Régions in Belgique)
+  - **Department/Province selection** (Départements in France, Provinces in Belgique)
+  - **Commune/City input**
+- 🏷️ Interactive tag-based location selection with search functionality
 - ⚡ One-click **Google search opening** (new tab)
+- 🎨 Professional UI with smooth animations and clean design
 
 ---
 
@@ -25,6 +30,7 @@ A smart Chrome extension that helps sourcing professionals generate optimized Go
 - Purchasing agents (acheteurs)  
 - Business developers working in **B2B supplier search**  
 - Teams validating wholesalers, manufacturers, and distributors  
+- Professionals targeting French and Belgian markets
 
 ---
 
@@ -47,23 +53,34 @@ A smart Chrome extension that helps sourcing professionals generate optimized Go
 1. Clone or download the repo.  
 2. Go to `chrome://extensions` and enable **Developer Mode**.  
 3. Click **Load unpacked** and select the extension folder.  
-4. Open the extension popup (🧭) from Chrome’s toolbar.  
-5. Fill in product, company type, and location.  
-6. Click **Generate Search** → then **Open Search** to launch results.  
+4. Open the extension popup from Chrome's toolbar.  
+5. Fill in product, company type, precision, country, location type, and platform.  
+6. Select locations using the interactive search and tag system.  
+7. Click **Generate Search** → then **Open Search** to launch results in a new tab.  
 
 ---
 
 ## 🧪 Built With
 
 - HTML / CSS / Vanilla JavaScript  
-- Manifest v3 (Chrome Extensions API)  
+- Chrome Extensions Manifest v3  
 - `chrome.tabs` API (for opening search in a new tab)  
+- Modular JavaScript architecture  
+- Country-specific data structures
+
+---
+
+## 🌍 Supported Countries
+
+- **France**: Complete region and department coverage
+- **Belgique**: Region and province support
 
 ---
 
 ## 🤝 Credits
 
-Developed by [@nX0D007 (N. Lakhnech)](https://www.linkedin.com/in/n-lakhnech)  
+Developed by [N. Lakhnech](https://www.linkedin.com/in/n-lakhnech)  
+**Signature**: N.A.L - SupplyHunter Creator
 
 ---
 

@@ -18,13 +18,13 @@ const Belgique = {
         "Namur"
     ],
     locationTypes: [
-        { value: 'region', label: 'Région' },
+        { value: 'region', label: 'Region' },
         { value: 'province', label: 'Province' },
         { value: 'commune', label: 'Commune' }
     ],
     platforms: [
         { value: 'kbopub.economie.fgov.be', label: 'KBO (Banque-Carrefour des Entreprises)' },
-        { value: 'pagesdor.be', label: 'Pages d\'Or' },
+        { value: 'Pappers.be', label: 'Pappers' },
         { value: 'companyweb.be', label: 'Companyweb' },
         { value: 'infobel.be', label: 'Infobel' },
         { value: 'custom', label: 'Autre (personnalisé)' }
