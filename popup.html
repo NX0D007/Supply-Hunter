@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
+<button id="themeToggle">🌙</button>
+
 <body>
   <h2>SupplyHunter</h2>
   <p class="slogan">Find suppliers faster, smarter.</p>
@@ -46,7 +48,7 @@
     <label for="locationType">Type de localisation :</label>
     <select id="locationType">
       <option value="" selected disabled>Choisir l'emplacement...</option>
-      <option value="region">Région</option>
+      <option value="region">Region</option>
       <option value="department">Département</option>
       <option value="commune">Commune</option>
     </select>
@@ -98,6 +100,8 @@
     </div>
   </div>
 
+  <link rel="stylesheet" href="modules/Theme/darkmode.css">
+  <script src="modules/theme/darkmode.js"></script>
   <script src="popup.js" type="module"></script>
 </body>
 

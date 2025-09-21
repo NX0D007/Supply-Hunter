@@ -38,8 +38,8 @@ const France = {
         "Val-de-Marne (94)", "Val-d'Oise (95)"
     ],
     locationTypes: [
-        { value: 'region', label: 'Région' },
-        { value: 'department', label: 'Département' },
+        { value: 'region', label: 'Region' },
+        { value: 'department', label: 'Departement' },
         { value: 'commune', label: 'Commune' }
     ],
     platforms: [
