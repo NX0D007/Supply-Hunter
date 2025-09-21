@@ -7,7 +7,7 @@ import {
   updateTags,
   initSearch,
   state
-} from '../modules/LocationSelector/index.js';
+} from '../modules/locationSelector/index.js';
 
 // Fonction pour peupler les plateformes en fonction du pays
 function populatePlatforms(platformSelect, customPlatformInput, country) {

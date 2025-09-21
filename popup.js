@@ -1,7 +1,7 @@
-import { state } from './modules/LocationSelector/index.js';
+import { state } from './modules/locationSelector/index.js';
 import { buildQuery } from './utils/queryBuilder.js';
 import { setupDomEvents } from './utils/domUtils.js';
-import companyKeywords from './data/keywords/companyKeywords.js';
+import companyKeywords from './data/Keywords/companyKeywords.js';
 
 document.addEventListener('DOMContentLoaded', function () {
   // Initialisation par défaut si nécessaire

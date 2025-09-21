@@ -1,108 +1,108 @@
-<!DOCTYPE html>
-<html lang="fr">
+  <!DOCTYPE html>
+  <html lang="fr">
 
-<head>
-  <meta charset="UTF-8">
-  <title>SupplyHunter</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <title>SupplyHunter</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
 
-<button id="themeToggle">🌙</button>
+  <button id="themeToggle">🌙</button>
 
-<body>
-  <h2>SupplyHunter</h2>
-  <p class="slogan">Find suppliers faster, smarter.</p>
+  <body>
+    <h2>SupplyHunter</h2>
+    <p class="slogan">Find suppliers faster, smarter.</p>
 
-  <div id="supplyhunter-popup">
-    <!-- Produit -->
-    <label for="product">Produit / Catégorie :</label>
-    <input type="text" id="product" placeholder="Ex : Tournevis, accessoires, plante..">
+    <div id="supplyhunter-popup">
+      <!-- Produit -->
+      <label for="product">Produit / Catégorie :</label>
+      <input type="text" id="product" placeholder="Ex : Tournevis, accessoires, plante..">
 
-    <!-- Type d'entreprise -->
-    <label for="companyType">Type d'entreprise :</label>
-    <select id="companyType">
-      <option value="Fabricant">Fabricant</option>
-      <option value="Producteur">Producteur</option>
-      <option value="Grossiste">Grossiste</option>
-      <option value="Distributeur">Distributeur</option>
-      <option value="Importateur">Importateur</option>
-      <option value="Détaillant">Détaillant</option>
-      <option value="Négociant">Négociant</option>
-    </select>
+      <!-- Type d'entreprise -->
+      <label for="companyType">Type d'entreprise :</label>
+      <select id="companyType">
+        <option value="Fabricant">Fabricant</option>
+        <option value="Producteur">Producteur</option>
+        <option value="Grossiste">Grossiste</option>
+        <option value="Distributeur">Distributeur</option>
+        <option value="Importateur">Importateur</option>
+        <option value="Détaillant">Détaillant</option>
+        <option value="Négociant">Négociant</option>
+      </select>
 
-    <!-- Précision -->
-    <label for="precision">Précision :</label>
-    <select id="precision">
-      <option value="souple" selected>Souple</option>
-      <option value="large">Large</option>
-    </select>
+      <!-- Précision -->
+      <label for="precision">Précision :</label>
+      <select id="precision">
+        <option value="souple" selected>Souple</option>
+        <option value="large">Large</option>
+      </select>
 
-    <!-- Localisation -->
-    <label for="country">Pays :</label>
-    <select id="country">
-      <option value="France" selected>France</option>
-      <option value="Belgique">Belgique</option>
-    </select>
+      <!-- Localisation -->
+      <label for="country">Pays :</label>
+      <select id="country">
+        <option value="France" selected>France</option>
+        <option value="Belgique">Belgique</option>
+      </select>
 
-    <!-- Type de localisation -->
-    <label for="locationType">Type de localisation :</label>
-    <select id="locationType">
-      <option value="" selected disabled>Choisir l'emplacement...</option>
-      <option value="region">Region</option>
-      <option value="department">Département</option>
-      <option value="commune">Commune</option>
-    </select>
+      <!-- Type de localisation -->
+      <label for="locationType">Type de localisation :</label>
+      <select id="locationType">
+        <option value="" selected disabled>Choisir l'emplacement...</option>
+        <option value="region">Region</option>
+        <option value="department">Département</option>
+        <option value="commune">Commune</option>
+      </select>
 
-    <!-- Container pour Région (caché par défaut) -->
-    <div id="regionContainer" style="display: none;">
-      <label>Région :</label>
-      <div class="region-selector">
-        <input type="text" class="search-input" placeholder="Rechercher une région..." id="regionSearch">
-        <div id="regionCheckboxes" class="checkbox-container"></div>
+      <!-- Container pour Région (caché par défaut) -->
+      <div id="regionContainer" style="display: none;">
+        <label>Région :</label>
+        <div class="region-selector">
+          <input type="text" class="search-input" placeholder="Rechercher une région..." id="regionSearch">
+          <div id="regionCheckboxes" class="checkbox-container"></div>
+        </div>
+      </div>
+
+      <!-- Container pour Département (caché par défaut) -->
+      <div id="departmentContainer" style="display: none;">
+        <label>Département :</label>
+        <div class="region-selector">
+          <input type="text" class="search-input" placeholder="Rechercher un département..." id="departmentSearch">
+          <div id="departmentCheckboxes" class="checkbox-container"></div>
+        </div>
+      </div>
+
+      <!-- Container pour Commune (caché par défaut) -->
+      <div id="communeContainer" style="display: none;">
+        <label for="communeInput">Nom de la commune :</label>
+        <input type="text" id="communeInput" placeholder="Ex : Paris, Lyon, Marseille...">
+      </div>
+
+      <!-- Plateforme -->
+      <label for="platform">Plateforme :</label>
+      <select id="platform">
+        <!-- Rempli dynamiquement -->
+      </select>
+      <input type="text" id="customPlatform" placeholder="Entrez votre site (ex: alibaba.com)" style="display: none;">
+
+      <!-- Bouton générer -->
+      <button id="generateBtn">Générer la recherche</button>
+
+      <div id="searchUrlContainer" style="display: none; margin-top: 15px;">
+        <label>URL de recherche générée :</label>
+        <textarea id="searchUrl" readonly rows="3" style="width: 100%; padding: 8px; font-size: 12px;"></textarea>
+        <button id="openSearchBtn" style="margin-top: 8px; width: 100%; padding: 8px;">Ouvrir la recherche</button>
+      </div>
+
+      <!-- SIGNATURE N.A.L -->
+      <div class="signature">
+        <div class="signature-text">N.A.L</div>
+        <div class="signature-subtitle">SupplyHunter Creator</div>
       </div>
     </div>
 
-    <!-- Container pour Département (caché par défaut) -->
-    <div id="departmentContainer" style="display: none;">
-      <label>Département :</label>
-      <div class="region-selector">
-        <input type="text" class="search-input" placeholder="Rechercher un département..." id="departmentSearch">
-        <div id="departmentCheckboxes" class="checkbox-container"></div>
-      </div>
-    </div>
+    <link rel="stylesheet" href="modules/Theme/darkmode.css">
+    <script src="modules/theme/darkmode.js"></script>
+    <script src="popup.js" type="module"></script>
+  </body>
 
-    <!-- Container pour Commune (caché par défaut) -->
-    <div id="communeContainer" style="display: none;">
-      <label for="communeInput">Nom de la commune :</label>
-      <input type="text" id="communeInput" placeholder="Ex : Paris, Lyon, Marseille...">
-    </div>
-
-    <!-- Plateforme -->
-    <label for="platform">Plateforme :</label>
-    <select id="platform">
-      <!-- Rempli dynamiquement -->
-    </select>
-    <input type="text" id="customPlatform" placeholder="Entrez votre site (ex: alibaba.com)" style="display: none;">
-
-    <!-- Bouton générer -->
-    <button id="generateBtn">Générer la recherche</button>
-
-    <div id="searchUrlContainer" style="display: none; margin-top: 15px;">
-      <label>URL de recherche générée :</label>
-      <textarea id="searchUrl" readonly rows="3" style="width: 100%; padding: 8px; font-size: 12px;"></textarea>
-      <button id="openSearchBtn" style="margin-top: 8px; width: 100%; padding: 8px;">Ouvrir la recherche</button>
-    </div>
-
-    <!-- SIGNATURE N.A.L -->
-    <div class="signature">
-      <div class="signature-text">N.A.L</div>
-      <div class="signature-subtitle">SupplyHunter Creator</div>
-    </div>
-  </div>
-
-  <link rel="stylesheet" href="modules/Theme/darkmode.css">
-  <script src="modules/theme/darkmode.js"></script>
-  <script src="popup.js" type="module"></script>
-</body>
-
-</html>
+  </html>
