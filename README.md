@@ -20,14 +20,17 @@ A smart Chrome extension that helps sourcing professionals generate optimized Go
   - **Commune/City input**
 - 🏷️ Interactive tag-based location selection with search functionality
 - ⚡ One-click **Google search opening** (new tab)
-- 🎨 Professional UI with smooth animations and clean design
+- 🌙 **Dark & Light Mode**:  
+  - Adapts automatically to your system theme  
+  - Includes a manual toggle button for instant switching  
+- 🎨 Smooth, professional UI with animations and clean design  
 
 ---
 
 ## 🎯 Who is this for?
 
-- Sourcing specialists (sourceurs)  
-- Purchasing agents (acheteurs)  
+- Sourcing specialists
+- Buyers and business prospectors
 - Business developers working in **B2B supplier search**  
 - Teams validating wholesalers, manufacturers, and distributors  
 - Professionals targeting French and Belgian markets
